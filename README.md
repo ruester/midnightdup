@@ -1,0 +1,1 @@
+# MidnightDup - Duplicate File Finder
