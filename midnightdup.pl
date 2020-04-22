@@ -17,6 +17,8 @@ use constant SEPREGEX => '\.\.__~~--##SEPERATOR##--~~__\.\.';
 
 use Data::Dumper;
 
+$Digest::MD5::File::NOFATALS = 1;
+
 sub dialog {
     our $mw;
     $mw->messageBox(-message => shift);
@@ -141,6 +143,7 @@ sub start_search {
         # run md5 over complete files and add to hash
         foreach my $file (@arr) {
             my $sum = file_md5_hex($file);
+            last unless defined $sum;
             my @tmparr = ($sum, $file);
             push(@{ $result{$sum} }, $file);
         }
