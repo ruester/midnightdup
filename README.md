@@ -1,5 +1,9 @@
 # MidnightDup - Duplicate File Finder
 
-A small (and very fast!) tool to find duplicate files within a given directory.
+[![Build Status](https://travis-ci.com/ruester/midnightdup.svg?branch=master)](https://travis-ci.com/ruester/midnightdup)
+
+A small (and very fast) tool to find duplicate files within a given directory.
+
+Download latest version ![here](https://github.com/ruester/midnightdup/raw/master/midnightdup.exe).
 
 ![Screenshot of tool](https://raw.githubusercontent.com/ruester/midnightdup/master/test/screenshot.png)

@@ -20,6 +20,8 @@ use Data::Dumper;
 
 $Digest::MD5::File::NOFATALS = 1;
 
+our $VERSION = 0.1;
+
 sub dialog {
     our $mw;
     $mw->messageBox(-message => shift);
