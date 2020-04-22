@@ -176,6 +176,8 @@ sub start_search {
         my $total = $arr[0];
         my @files = @{$arr[1]};
 
+        next if $total == 0;
+
         $alltotal += $total;
 
         $total = format_bytes($total, bs => 1000, si => 1);
