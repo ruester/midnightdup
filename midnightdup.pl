@@ -161,7 +161,7 @@ sub start_search {
     foreach my $key (keys %result) {
         my @arr = @{ $result{$key} };
         my $size = (stat $arr[0])[7];
-        my @tmparr = ($size, \@arr);
+        my @tmparr = ($size * (scalar(@arr) - 1), \@arr);
         push(@sort, \@tmparr);
     }
 
@@ -170,9 +170,8 @@ sub start_search {
     # show duplicates in listbox
     foreach my $a (@sort) {
         my @arr = @$a;
-        my $size = $arr[0];
+        my $total = $arr[0];
         my @files = @{$arr[1]};
-        my $total = $size * (scalar(@files) - 1);
 
         $alltotal += $total;
 
