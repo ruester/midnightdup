@@ -7,6 +7,7 @@ use utf8;
 use Tk;
 use File::Find;
 use File::Temp;
+use File::Basename;
 use Cwd qw(cwd);
 use Digest::MD5 qw(md5_hex);
 use Digest::MD5::File qw(file_md5_hex);
@@ -86,10 +87,12 @@ sub process_file {
 
     our $waitlabel;
 
-    $waitlabel->configure(
-        -text => 'Searching... ' . $filecount
-    );
-    $waitlabel->update();
+    if (int(rand(100)) == 1) {
+        $waitlabel->configure(
+            -text => 'Scanning files... (' . $filecount . ' files scanned)'
+        );
+        $waitlabel->update();
+    }
 }
 
 sub start_search {
@@ -111,7 +114,7 @@ sub start_search {
     find(\&process_file, @DIRLIST);
 
     $waitlabel->configure(
-        -text => 'Processing...',
+        -text => 'Finding duplicates...',
     );
     $waitlabel->update();
 
@@ -142,6 +145,15 @@ sub start_search {
 
         # run md5 over complete files and add to hash
         foreach my $file (@arr) {
+            if (int(rand(100)) == 1) {
+                $waitlabel->configure(
+                    -text => 'Finding duplicates... (checking \''
+                        . basename($file)
+                        . '\')',
+                );
+                $waitlabel->update();
+            }
+
             my $sum = file_md5_hex($file);
             last unless defined $sum;
             my @tmparr = ($sum, $file);
@@ -279,7 +291,7 @@ my $search_btn = $mw->Button(
         $tmpfh->unlink_on_destroy(1);
 
         our $waitlabel->configure(
-            -text => 'Searching...'
+            -text => 'Scanning files...'
         );
 
         my @empty = ('');
